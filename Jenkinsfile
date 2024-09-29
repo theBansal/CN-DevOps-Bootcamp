@@ -1,13 +1,12 @@
 pipeline {
   agent any
-   stages {
-    stage('test') {
+
+  stages {
+     stage('test') {
       steps {
         sh 'echo Hello'
       }
-    }
-
-  stages {
+     }
     stage('Install Dependencies') {
       steps {
         sh 'npm install'
