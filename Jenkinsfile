@@ -9,7 +9,7 @@ pipeline {
      }
     stage('install') {
       steps {
-        npm install
+        npm 'install'
       }
      }
   }
