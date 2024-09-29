@@ -7,5 +7,10 @@ pipeline {
         echo 'Hello'
       }
      }
+    stage('install') {
+      steps {
+        npm install
+      }
+     }
   }
 }
