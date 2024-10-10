@@ -9,7 +9,7 @@ pipeline {
      }
     stage('install') {
       steps {
-        bat 'npm install express'
+        sh 'npm install express'
       }
      }
   }
