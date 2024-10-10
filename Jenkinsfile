@@ -9,7 +9,7 @@ pipeline {
      }
     stage('install') {
       steps {
-        sh 'apt-get install python'
+        sh 'sudo apt-get install python'
       }
      }
       stage('verify') {
