@@ -7,10 +7,5 @@ pipeline {
         echo 'Hello'
       }
      }
-    stage('install') {
-      steps {
-        sh 'npm install express'
-      }
-     }
   }
 }
