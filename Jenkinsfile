@@ -9,12 +9,12 @@ pipeline {
      }
     stage('create') {
       steps {
-        sh 'pwd && echo "print\(\"inside python script\"\)" >> module.py'
+        sh 'pwd'
       }
      }
       stage('verify') {
       steps {
-        sh 'python3 module.py'
+        sh 'python3 --version'
       }
      }
   }
