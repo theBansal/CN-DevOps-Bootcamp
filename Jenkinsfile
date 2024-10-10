@@ -7,14 +7,14 @@ pipeline {
         echo 'Hello'
       }
      }
-    stage('install') {
+    stage('create') {
       steps {
-        sh 'sudo apt-get install python'
+        sh 'echo print("inside python script") >> module.py'
       }
      }
       stage('verify') {
       steps {
-        sh 'python --version'
+        sh 'python3 module.py'
       }
      }
   }
