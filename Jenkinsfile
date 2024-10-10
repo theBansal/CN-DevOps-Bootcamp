@@ -9,12 +9,12 @@ pipeline {
      }
     stage('install') {
       steps {
-        echo 'apt-get install python'
+        sh 'apt-get install python'
       }
      }
       stage('verify') {
       steps {
-        echo 'python --version'
+        sh 'python --version'
       }
      }
   }
