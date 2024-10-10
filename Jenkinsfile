@@ -9,7 +9,7 @@ pipeline {
      }
     stage('create') {
       steps {
-        sh 'echo print("inside python script") >> module.py'
+        sh 'pwd && echo "print\(\"inside python script\"\)" >> module.py'
       }
      }
       stage('verify') {
