@@ -1,0 +1,60 @@
+19:00:29 From Jay Sardar to Everyone:
+	good evening sir
+19:00:48 From Jay Sardar to Everyone:
+	yes
+19:00:50 From Shiva Karka to Everyone:
+	Good evening
+19:00:51 From Jay Sardar to Everyone:
+	audible
+19:00:52 From Shiva Karka to Everyone:
+	all good
+19:01:48 From Md Sibghatullah to Everyone:
+	Hi Good Evening
+19:24:11 From Nikhil Kumar Singh to Everyone:
+	no
+19:34:48 From Abhishek M S to Everyone:
+	visible
+19:34:49 From Santanu Goswami to Everyone:
+	yes
+19:37:23 From Coding Ninjas to Everyone:
+	Retain - Retains the PV if no pvc is attached	  Delete - Deletes the PV if no pvc is attached	  Recycle - Cleans the data from PV to keep it ready for use, but does not delete the PV
+19:41:13 From Coding Ninjas to Everyone:
+	apiVersion: v1	kind: PersistentVolume	metadata:	  name: my-pv	spec:	  capacity:	    storage: 1Gi	  accessModes:	    - ReadWriteOnce	  persistentVolumeReclaimPolicy: Retain	  storageClassName: manual	  hostPath:	    path: "/d/CN_DevOps/"
+19:41:58 From Coding Ninjas to Everyone:
+	kubectl apply -f pv.yaml
+19:43:15 From Coding Ninjas to Everyone:
+	//pvc.yaml	apiVersion: v1	kind: PersistentVolumeClaim	metadata:	  name: my-pvc	spec:	  accessModes:	    - ReadWriteOnce	  resources:	    requests:	      storage: 1Gi	  storageClassName: manual
+19:44:06 From Coding Ninjas to Everyone:
+	kubectl apply -f pvc.yaml
+19:46:09 From Coding Ninjas to Everyone:
+	//pod.yaml	apiVersion: v1	kind: Pod	metadata:	  name: my-pod	spec:	  containers:	  - name: my-container	    image: nginx	    volumeMounts:	    - mountPath: "/usr/share/nginx/html"	      name: my-storage	  volumes:	  - name: my-storage	    persistentVolumeClaim:	      claimName: my-pvc
+19:51:42 From Coding Ninjas to Everyone:
+	kubectl apply -f pod.yaml
+19:51:47 From Coding Ninjas to Everyone:
+	kubectl exec -it my-pod -- /bin/bash
+20:01:33 From Coding Ninjas to Everyone:
+	//storageClass.yaml	apiVersion: storage.k8s.io/v1	kind: StorageClass	metadata:	  name: fast-storage	provisioner: kubernetes.io/no-provisioner	volumeBindingMode: Immediate
+20:01:58 From Coding Ninjas to Everyone:
+	//pvc-sc.yaml	apiVersion: v1	kind: PersistentVolumeClaim	metadata:	  name: dynamic-pvc	spec:	  accessModes:	    - ReadWriteOnce	  resources:	    requests:	      storage: 1Gi	  storageClassName: fast-storage
+20:02:15 From Coding Ninjas to Everyone:
+	// new-pod.yaml	apiVersion: v1	kind: Pod	metadata:	  name: my-pod	spec:	  containers:	  - name: my-container	    image: nginx	    volumeMounts:	    - mountPath: "/usr/share/nginx/html"	      name: my-storage	  volumes:	  - name: my-storage	    persistentVolumeClaim:	      claimName: dynamic-pvc
+20:08:37 From Coding Ninjas to Everyone:
+	https://github.com/theBansal/CN-DevOps-Bootcamp
+20:08:41 From Coding Ninjas to Everyone:
+	Class&
+20:08:46 From Coding Ninjas to Everyone:
+	Class 7
+20:20:13 From Rakesh Mohan Tarai to Everyone:
+	sir i am facing a issue
+20:27:13 From Coding Ninjas to Everyone:
+	apiVersion: apps/v1	kind: Deployment	metadata:	  name: nginx-deployment	  labels:	    app: nginx	spec:	  replicas: 2	  selector:	    matchLabels:	      app: nginx	  template:	    metadata:	      labels:	        app: nginx	    spec:	      containers:	      - name: nginx	        image: nginx:latest	        resources:	          requests:	            cpu: "500m"	            memory: "512Mi"	          limits:	            cpu: "900m"	            memory: "1Gi"	        ports:	        - containerPort: 80
+20:27:23 From Coding Ninjas to Everyone:
+	nginx-deployment.yaml
+20:29:17 From Coding Ninjas to Everyone:
+	//nginx-service.yaml	apiVersion: v1	kind: Service	metadata:	  name: nginx-service	spec:	  type: LoadBalancer	  ports:	    - port: 80	      targetPort: 80	  selector:	    app: nginx
+20:31:10 From Coding Ninjas to Everyone:
+	kubectl autoscale deployment nginx-deployment --cpu-percent=50 --min=2 --max=10
+20:37:14 From Jay Sardar to Everyone:
+	sir, how will we create redis deployment? will it use persistant storage?
+20:41:00 From Jay Sardar to Everyone:
+	ok
