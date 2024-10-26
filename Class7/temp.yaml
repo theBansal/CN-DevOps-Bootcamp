@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers:
+  - name: test-container
+    image: busybox  # A lightweight image to use for testing
+    command: ["sh", "-c", "sleep 3600"]  # Keeps the container running
+    volumeMounts:
+    - mountPath: /mnt/test/  # Where the hostPath will be mounted inside the container
+      name: test-volume
+  volumes:
+  - name: test-volume
+    hostPath:
+      path: "/d/CN_DevOps/"   # Path to test
