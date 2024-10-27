@@ -1,0 +1,21 @@
+20:12:34 From Deependra Singh to Everyone:
+	will be back ... in few mins
+20:21:44 From Deependra Singh to Everyone:
+	2 helm version
+	   3 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+	   4 helm repo update
+	   5 helm install prometheus prometheus-community/prometheus
+	   6 helm install prometheus prometheus-community/prometheus
+	   7 helm repo add grafana https://grafana.github.io/helm-charts
+	   8 helm repo update
+	   9 helm install grafana grafana/grafana
+	  10 kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | echo
+	  11 kubectl port-forward svc/prometheus-server 9090:80
+20:22:45 From Coding Ninjas to Everyone:
+	http://prometheus-server.<namespace>.svc.cluster.local:80
+20:28:07 From Coding Ninjas to Everyone:
+	groups:	- name: example-alert	  rules:	  - alert: HighCPUUsage	    expr: node_cpu_seconds_total{mode="idle"} < 20	    for: 5m	    labels:	      severity: critical	    annotations:	      summary: "High CPU usage detected"	      description: "The CPU usage is above 80% for more than 5 minutes."
+20:29:17 From Coding Ninjas to Everyone:
+	route:	  receiver: 'email-notifications'		receivers:	  - name: 'email-notifications'	    email_configs:	      - to: 'your-email@example.com'	        from: 'prometheus@example.com'	        smarthost: 'smtp.example.com:587'
+20:33:36 From Coding Ninjas to Everyone:
+	kubectl create configmap alert-rules --from-file=alerts.yaml --namespace monitoring
